@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="sm-auto col-lg-10">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
+        <h1 class="h2">Set Exam :</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a type="button" class="btn btn-sm btn-outline-secondary">Share</a>
+                <a type="button" class="btn btn-sm btn-outline-secondary">Export</a>
+            </div>
+            <a type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <div>
+            <div class="row">
+                <p class="text-warning my-3 h3">{% for message in messages %}
+                    {{ message }}
+                    {% endfor %}</p>    
+                <form action="/setexam" method="POST">
+                    {% csrf_token %}
+                    <label>Year</label>
+                    <select class="form-control" name="year">
+                        <option value="First Year">First Year</option>
+                        <option value="Second Year">Second Year</option>
+                        <option value="Third Year">Third Year</option>
+                        <option value="Fourth Year">Fourth Year</option>
+                    </select>
+                    <label>Semester</label>
+                    <select class="form-control" name="semester">
+                        <option value="First">First</option>
+                        <option value="Second">Second</option>
+                        <option value="Third">Third</option>
+                        <option value="Fourth">Fourth</option>
+                        <option value="Fifth">Fifth</option>
+                        <option value="Sixth">Sixth</option>
+                        <option value="Seventh">Seventh</option>
+                        <option value="Eighth">Eighth</option>
+                    </select>
+                    <label>Subject</label>
+                    <select class="form-control" name="subject">
+                        <option value="Engineering Mathematics - I">Engineering Mathematics - I</option>
+                        <option value="Engineering Chemistry">Engineering Chemistry</option>
+                        <option value="Engineering Mechanics"> Engineering Mechanics</option>
+                        <option value="Computer Programming in C">Computer Programming in C</option>
+                        <option value="Engineering Mathematics - II">Engineering Mathematics - II</option>
+                        <option value="Engineering Physics">Engineering Physics</option>
+                        <option value="Engineering Graphics">Engineering Graphics</option>
+                        <option value="Communication Skills">Communication Skills</option>
+                        <option value="Engineering Mathematics - III">Engineering Mathematics - III</option>
+                        <option value="Discrete Mathematics">Discrete Mathematics</option>
+                        <option value="Data Structures">Data Structures</option>
+                        <option value="Computer Architecture & Organization">Computer Architecture & Organization</option>
+                        <option value="Design and Analysis of Algorithms">Design and Analysis of Algorithms</option>
+                        <option value="Probability & Statistics">Probability & Statistics</option>
+                        <option value="Operating Systems">Operating Systems</option>
+                        <option value="Product Design Engineering">Product Design Engineering</option>
+                        <option value="Database Systems">Database System</option>
+                        <option value="Theory of Computations">Theory of Computations</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                        <option value="Cyber Laws">Cyber Laws</option>
+                        <option value="Compiler Design">Computer Design</option>
+                        <option value="Computer Networks">Computer Networks</option>
+                        <option value="Artificial Intelligence">Artificial Intelligence</option>
+                        <option value="Internet of Things">Internet of Things</option>
+                        <option value="Software Engineering">Software Engineering</option>
+                        <option value="Distributed System">Distributed System</option>
+                        <option value="Cloud Computing">Cloud Computing</option>
+                        <option value="Blockchain Technology">Blockchain Technology</option>
+                        <option value="Deep Learning">Deep Learning</option>
+                        <option value="Cryptography and Network Security">Cryptography and Network Security</option>    
+                    </select>
+                    <div class="form-group">
+                        <button class="btn btn-primary my-4" type="submit" name="exam">Create Exam</button>
+                    </div>
+                    
+             </form>   
+                
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'student/sbase.html' %}
+{% load static %}
+{% block content %}
+<section class="d-flex align-items-center">
+</section>
+<div class="container my-4">
+
+        <div class="row my-4 mx-4">
+            <div class="col-6">
+                <label>Name :</label>
+                <p class="font-weight-bold h4">{{ user.first_name }} {{ user.last_name }}</p>
+            </div>
+            <div class="col-6">
+                <label>SAAP ID :</label>
+                
+                {% for in in inf %}                    
+                <p class="font-weight-bold h4">{{ in.s_id }}</p>
+                
+            </div>
+        </div>
+        <div class="row my-4 mx-4">
+            <div class="col-6">
+                <label>Depatment :</label>
+                <p class="font-weight-bold h4">{{ in.dpt }}</p>
+            </div>
+            <div class="col-6">
+                <label>Year :</label>
+                <p class="font-weight-bold h4">{{ in.year }}</p>
+            </div>
+            
+        </div>
+        <div class="row my-4 mx-4">
+            <div class="col-6">
+                <label>Mob.Number :</label>
+                <p class="font-weight-bold h4">{{ in.m_num }}</p>
+            </div>
+            {% endfor %}
+            <div class="col-6">
+                <label for="exampleInputEmail1">Email address</label>
+                <p class="font-weight-bold h4">{{ user.username }}</p>
+            </div>
+        </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Reports</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <div class="btn-group mr-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+      </div>
+      <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+        <span data-feather="calendar"></span>
+        This week
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Create class -->
+
+  <font class="m-2 btn-light">
+
+    <div class="form-inline">
+
+      <div class="form-group mr-3 mb-2">
+
+        <input type="Number" class="form-control" id="inputPassword2" placeholder="Exam paper code....">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Search</button>
+
+
+      <!--   <div class="row">
+                 <div class="col form-group">
+                 <label>Year :</label>
+                 <select type="text" name="yr" class="form-control" placeholder="choce.." required="required">
+                      <option>Select...</option>
+                    <option> 1st Year </option>
+                    <option> 2nd Year</option>
+                    <option> 3rd Year</option>
+                    <option> 4th Year</option>
+                  
+                 </select>
+            </div>
+
+
+            <div class="col form-group">
+                 <label>Sem :</label>
+                 <select type="text" name="yr" class="form-control" placeholder="choce.." required="required">
+                      <option>Select...</option>
+                    <option> 1st Sem </option>
+                    <option> 2nd Sem</option>
+                    <option> 3rd Sem</option>
+                    <option> 4th Sem</option>
+                  
+                 </select>
+            </div> -->
+
+
+    </div>
+
+  </font>
+
+
+
+
+
+  <div>
+
+
+    <table class="table">
+      <thead class="thead-primary">
+        <tr>
+          <th scope="col">class name</th>
+          <th scope="col">Year</th>
+          <th scope="col">Sem</th>
+          <th scope="col">Subject Code</th>
+          <th scope="col">View</th>
+          <th scope="col">Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+
+          <td>java</td>
+          <td>4th</td>
+          <td>7</td>
+          <td>340968509</td>
+          <td><button class="btn btn-outline-primary"> View </button></td>
+          <td><button class="btn btn-outline-danger">Downloade</button></td>
+        </tr>
+
+        <tr>
+
+          <td>java</td>
+          <td>4th</td>
+          <td>7</td>
+          <td>340968509</td>
+          <td><button class="btn btn-outline-primary"> View </button></td>
+          <td><button class="btn btn-outline-danger">Downloade</button></td>
+        </tr>
+
+        <tr>
+
+          <td>java</td>
+          <td>4th</td>
+          <td>7</td>
+          <td>340968509</td>
+          <td><button class="btn btn-outline-primary"> View </button></td>
+          <td><button class="btn btn-outline-danger">Downloade</button></td>
+        </tr>
+
+        <tr>
+
+          <td>java</td>
+          <td>4th</td>
+          <td>7</td>
+          <td>340968509</td>
+          <td><button class="btn btn-outline-primary"> View </button></td>
+          <td><button class="btn btn-outline-danger">Downloade</button></td>
+        </tr>
+
+        <tr>
+
+          <td>java</td>
+          <td>4th</td>
+          <td>7</td>
+          <td>340968509</td>
+          <td><button class="btn btn-outline-primary"> View </button></td>
+          <td><button class="btn btn-outline-danger">Downloade</button></td>
+        </tr>
+
+        <tr>
+
+          <td>java</td>
+          <td>4th</td>
+          <td>7</td>
+          <td>340968509</td>
+          <td><button class="btn btn-outline-primary"> View </button></td>
+          <td><button class="btn btn-outline-danger">Downloade</button></td>
+        </tr>
+
+        <tr>
+
+          <td>java</td>
+          <td>4th</td>
+          <td>7</td>
+          <td>340968509</td>
+          <td><button class="btn btn-outline-primary"> View </button></td>
+          <td><button class="btn btn-outline-danger">Downloade</button></td>
+        </tr>
+
+        <tr>
+
+          <td>java</td>
+          <td>4th</td>
+          <td>7</td>
+          <td>340968509</td>
+          <td><button class="btn btn-outline-primary"> View </button></td>
+          <td><button class="btn btn-outline-danger">Downloade</button></td>
+        </tr>
+
+
+      </tbody>
+    </table>
+
+
+  </div>
+</main>
+{% endblock %}

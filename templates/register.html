@@ -1,0 +1,101 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Aces</title>
+    <link href="{% static 'css/style.css'%}" rel="stylesheet">
+</head>
+
+<body class="text-center">
+    <div class="container ">
+        <p class="h2 my-5 py-5">Register</p>
+        <p class="text-warning my-3 h3">{% for message in messages %}
+        {{ message }}
+        {% endfor %}</p>
+        <div class="text-left">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row my-4 mx-4">
+                    <div class="col-6">
+                        <label>First Name :</label>
+                        <input type="text" name="first_name" class="form-control" placeholder="Enter first name"
+                            required="required">
+                    </div>
+                    <div class="col-6">
+                        <label>Last Name :</label>
+                        <input type="text" name="last_name" class="form-control" placeholder="Enter last name"
+                            required="required">
+                    </div>
+
+                </div>
+                <div class="row my-4 mx-4">
+                    <div class="col-4">
+                        <label>Depatment :</label>
+                        <select type="text" name="dpt" required="required" class="form-control">
+                            <option>Select...</option>
+                            <option value="Computer"> Computer </option>
+                            <option value="Mech">Mech</option>
+                            <option value="Civil">Civil</option>
+                            <option value="IT">IT</option>
+                            <option value="EL">EL</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <label>Year :</label>
+                        <select type="text" name="year" class="form-control" placeholder="choce.." required="required">
+                            <option>Select...</option>
+                            <option value="1st Year"> 1st Year </option>
+                            <option value="2nd Year"> 2nd Year</option>
+                            <option value="3rd Year"> 3rd Year</option>
+                            <option value="4th Year"> 4th Year</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <label>SAAP ID :</label>
+                        <input type="Number" name="s_id" class="form-control" placeholder="Enter saap id"
+                            required="required">
+                    </div>
+                </div>
+                <div class="row my-4 mx-4">
+                    <div class="col-6">
+                        <label>Mob.Number :</label>
+                        <input type="Number" id="phone" name="m_num" class="form-control" placeholder="Enter Number"
+                            maxlength="10" pattern="[0-9]{10}" required="required">
+                    </div>
+                    <div class="col-6">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" required="required" placeholder="Email">
+                    </div>
+                </div>
+                <div class="row my-4 mx-4">
+                    <div class="col-6">
+                        <label>Password</label>
+                        <input type="Password" name="input_password" class="form-control" id="exampleInputPassword1"
+                            required="required" placeholder="password">
+                    </div>
+                    <div class="col-6">
+                        <label>Confirm Password</label>
+                        <input type="Password" name="confirm_password" class="form-control" id="exampleInputPassword1"
+                            required="required" placeholder="Confirm password">
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center mt-5">
+                    <button type="submit" name="ssub" value="Submit" class="btn btn-dark">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

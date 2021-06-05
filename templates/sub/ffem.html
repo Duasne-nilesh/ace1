@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="col-md-9 ml-sm-auto col-lg-10">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
+        <h1 class="h2">Add Questions</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+            </button>
+        </div>
+    </div>
+    <div class="mr-5">
+        <h3>Year: {{year}}</h3>
+        <h3>Semester: {{semester}}</h3>
+        <h3>Subject: {{subject}}</h3>
+        <form action="/ffem?year={{year}}&semester={{semester}}&subject={{subject}}&category={{category}}" method="POST" class="m-2">
+            {% csrf_token %}
+            <div>
+                <div class="row m-3 mt-5">
+                    <div class="col form-group">
+                        <label for="que" class="font-weight-bold">Question:</label>
+                        <textarea class="form-control" placeholder="Type your question.." id="que" name="question"></textarea>
+                    </div>
+                </div>
+                <div class="row m-3">
+                    <label for="" class="col-12 font-weight-bold">Options :</label>
+                    <div class="col-3 form-group">
+                        <input class="form-control" id="input" type="text" name="option1" placeholder="Options..." />
+                    </div>
+                    <div class="col-3 form-group">
+                        <input class="form-control" id="input" type="text" name="option2" placeholder="Options..." />
+                    </div>
+                    <div class="col-3 form-group">
+                        <input class="form-control" id="input" type="text" name="option3" placeholder="Options..." />
+                    </div>
+                    <div class="col-3 form-group">
+                        <input class="form-control" id="input" type="text" name="option4" placeholder="Options..." />
+                    </div>
+                </div>
+                <div class="row m-3">
+                    <div class="col-4">
+                        <label for="cor_op" class="font-weight-bold"> Correct Option</label>
+                        <input class="form-control" id="input" type="text" id="cor_op" name="answer" placeholder="Correct option" />
+                    </div>
+                    <div class="col-8 mb-5">
+                        <label for="cat" class="font-weight-bold">Category :</label>
+                        <select type="text" name="category" class="form-control" placeholder="category" id="cat" >
+                            <option value="" hidden>Select question category</option>
+                            <option value="Knowledge">Knowledge</option>
+                            <option value="Understanding">Understanding</option>
+                            <option value="Ananlysis">Ananlysis</option>
+                            <option value="Application">Application</option>
+                        </select>
+                    </div>
+                </div>            
+            </div>
+            <div class="row">
+                <div class="col-10 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-default btn-primary">Add Question</button>
+                    <a class="btn btn-primary mx-3" href="/faculty">Create Test</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

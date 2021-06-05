@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Create Class</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <div class="btn-group mr-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+      </div>
+      <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+        <span data-feather="calendar"></span>
+        This week
+      </button>
+    </div>
+  </div>
+  <div class="mr-5 text-primary">
+    <div class="col">
+      <b> Class Code :<span class="text-dark">  </span> </b>
+    </div>
+    <!-- Create class -->
+    <form action="" method="POST" class="m-2 btn-light">
+      {% csrf_token %}
+      <div class="m-3 p-3">
+        <div class="form-group">
+          <label for="">Faculty Name</label>
+          <input type="text" class="form-control" placeholder="Enter the full name...." required="required"
+            name="faculty_name">
+        </div>
+        <div class="form-group">
+          <label for="">Class Name(Subject name)</label>
+          <input type="text" class="form-control" placeholder="Enter the class name...." required="required"
+            name="class_name">
+        </div>
+        <div class="form-group">
+          <label>Depatment :</label>
+          <select type="text" name="department" required="required" class="form-control">
+            <option>Select...</option>
+            <option value="Computer"> Computer </option>
+            <option value="Mech">Mech</option>
+            <option value="Civil">Civil</option>
+            <option value="IT">IT</option>
+            <option value="EL">EL</option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="col form-group">
+            <label>Year :</label>
+            <select type="text" name="year" class="form-control" placeholder="choce.." required="required">
+              <option>Select...</option>
+              <option value="1st Year"> 1st Year </option>
+              <option value="2nd Year"> 2nd Year</option>
+              <option value="3rd Year"> 3rd Year</option>
+              <option value="4th Year"> 4th Year</option>
+            </select>
+          </div>
+          <div class="col form-group">
+            <label>Sem :</label>
+            <select type="text" name="sem" class="form-control" placeholder="choce.." required="required">
+              <option>Select...</option>
+              <option value="1st Sem"> 1st Sem </option>
+              <option value="2nd Sem"> 2nd Sem</option>
+              <option value="3rd Sem"> 3rd Sem</option>
+              <option value="4th Sem"> 4th Sem</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock %}
