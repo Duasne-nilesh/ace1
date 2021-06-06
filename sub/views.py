@@ -5,6 +5,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 import requests
+import json
 
 
 def exam(request):
@@ -13,12 +14,35 @@ def exam(request):
     return render(request,'student/exam.html',{'a':a,'inf':inf})
 
 def start_exam(request,subject):
-    que = questions.objects.filter(subject=subject)
-    return render(request,'student/start_exam.html',{'que':que})
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            array_data = request.POST['submission']
+            data = json.loads(array_data)
+            for obj in data:
+                vals = list(obj.values())
+                print(vals)
+                year = vals[0]
+                sem = vals[1]
+                subject = vals[2]
+                q_id = int(vals[3])
+                sub_answer = vals[4]
+                corr_answer = vals[5]
+                category = vals[6]
+                marks=0
+                if sub_answer == corr_answer:
+                    marks = 1
+                else:
+                    marks = 0
+                print(marks)
+                res = quiz_response(student_id=request.user.id,year=year, semester=sem,subject=subject,q_id=q_id,sub_answer=sub_answer,corr_answer=corr_answer,category=category,marks=marks)
+                res.save()
+        que = questions.objects.filter(subject=subject)
+        return render(request,'student/start_exam.html',{'que':que,'subject':subject})
 
 def submit_response(request):
-    print(request)
-    """return render(request,'student/start_exam.html',{'que':que})"""
+    pass
+    # print(json.loads(request.POST.get('data', ''))
+    # return render(request,'student/start_exam.html')
 
 @staff_member_required
 def setexam(request):

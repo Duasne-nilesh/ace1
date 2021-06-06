@@ -16,52 +16,94 @@
 
 <body>
   <div class="container">
-  <form method='post' action="/submit_response" >
-      {% csrf_token %}
+  <!-- <form method='POST' action="/start_exam/{{ subject }}" >
+      {% csrf_token %} -->
       <h2 align="center">Test</h2>
       {% for al in que %}
       <div class="my-5">
-        <h5>Q{{forloop.counter}}. {{ al.question }}</h5>
+        <h5 name="q{{ forloop.counter }}" value="{{ forloop.counter }}">Q{{forloop.counter}}. {{ al.question }} - ({{ al.category }})</h5>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
+            <input class="form-check-input" type="radio" value="{{al.option1}}" name={{ forloop.counter }} id="q_{{ forloop.counter }}_o1">
+            <label class="form-check-label" for="q_{{ forloop.counter }}_o1">
                 {{al.option1}}
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
+            <input class="form-check-input" value="{{al.option2}}" type="radio" name={{ forloop.counter }} id="q_{{ forloop.counter }}_o2">
+            <label class="form-check-label" for="q_{{ forloop.counter }}_o2">
                 {{al.option2}}
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
+            <input class="form-check-input" type="radio" value="{{al.option3}}" name={{ forloop.counter}} id="q_{{ forloop.counter }}_o3">
+            <label class="form-check-label" for="q_{{ forloop.counter }}_o3">
                 {{al.option3}}
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
+            <input class="form-check-input" type="radio" value="{{al.option4}}" name={{ forloop.counter }} id="q_{{ forloop.counter }}_o4" >
+            <label class="form-check-label" for="q_{{ forloop.counter }}_o4">
               {{al.option4}}
             </label>
         </div>
+        <div class="d-none">
+          <input type="text" id="year_{{ forloop.counter }}" name="year_{{ forloop.counter }}" value={{al.year}}>
+          <input type="text" id="sem_{{ forloop.counter }}" name="sem_{{ forloop.counter }}" value={{al.semester}}>
+          <input type="text" id="sub_{{ forloop.counter }}" name="sub_{{ forloop.counter }}" value="{{ al.subject }}"">
+          <input type="text" id="id_{{ forloop.counter }}" name="id_{{ forloop.counter }}" value={{al.id}}>
+          <input type="text" id="c_{{ forloop.counter }}" name="c_{{ forloop.counter }}" value={{al.answer}}>
+          <input type="text" id="cat_{{ forloop.counter }}" name="cat_{{ forloop.counter }}" value={{al.category}}>
+        </div>
     </div>
       {% endfor %}
-      <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
+      <button class="btn btn-primary" id="submit">Submit</button>
+    <!-- </form> -->
   </div>
 
   <!-- Optional JavaScript; choose one of the two! -->
 
   <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
   </script>
 
+  <script>
+    let submission = [];
+    console.log(submission);
+    $(".form-check-input").on("click",function(){
+      console.log("answer selected - " + $(this).val());
+      const no = $(this).parent().parent().find("h5").attr("value");
+      const children = $(this).parent().parent().find(".d-none").children();
+      const year =children[0].value
+      const sem =children[1].value
+      const subject =children[2].value
+      const id =children[3].value
+      const selected = $(this).val();
+      const correct =children[4].value
+      const category =children[5].value
+      console.log(category, correct, id, year, sem, subject);
+      submission[no-1]=({year, sem, subject, id, selected, correct, category});
+      console.log(submission)
+    })
+    $("#submit").on("click",function(){
+      $.ajax({
+        headers: { "X-CSRFToken": "{{csrf_token}}" },
+        dataType: 'json', 
+        type: "POST",
+        url:"/start_exam/{{ subject }}",
+        data:{
+          'submission':JSON.stringify(submission)
+        },
+        success:function(data){
+          console.log(data);
+        },
+        error:function(err){
+          console.log(err);
+        }
+      })
+    })
+  </script>
   <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
