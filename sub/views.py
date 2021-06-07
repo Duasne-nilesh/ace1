@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, response
 from .models import *
+from calc.models import *
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
@@ -8,7 +9,7 @@ import requests
 import json
 
 
-def exam(request):
+def exams(request):
     a = questions.objects.order_by().values('subject','year','semester').distinct()
     inf = extendUser.objects.filter(user=request.user.id)
     return render(request,'student/exam.html',{'a':a,'inf':inf})

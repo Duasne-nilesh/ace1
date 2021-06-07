@@ -22,7 +22,7 @@ def home(request):
 
 
 def index(request):
-    return render(request,'student/index.html')
+    return redirect('student/exams')
 @staff_member_required
 def create_class(request):
     return render(request,'create_class.html')
