@@ -11,6 +11,7 @@ urlpatterns = [
     path('delete_test/<str:subject>',views.delete_test,name='delete_test'),
     path('submit_response',views.submit_response,name='submit_response'),
     # path('index/<str:year>',views.index,name='index'),
-    
+    path('report_details/<str:subject>',views.report_details,name='report_details'),
+    path('view_report',views.view_report,name='view_report'),
     path('', views.ffem,name='ffem')
 ]

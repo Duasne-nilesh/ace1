@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
+from sub.models import *
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
