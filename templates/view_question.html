@@ -16,12 +16,16 @@
 
 <body>
   <div class="container">
-      <h2 align="center">Question</h2>
+      <h2 align="center">{{subject}} Questions</h2>
       {% for queries in query %}
-      <div class="my-5">
+      <div class="my-3">
+        <div class="row">
+          <div class="card border-primary p-3" style="width:100%; background-color: #e6fbff;">
         <h5>Q{{forloop.counter}}. {{ queries.question }}</h5>
-        <h5>Answer: {{ queries.answer }}</h5>
-        <h5>Category: {{ queries.category }}</h5>
+        <h5 class="text-success">Answer: {{ queries.answer }}</h5>
+        <h5 class="text-warning">Category: {{ queries.category }}</h5>
+        </div>
+        </div>
     </div>
       {% endfor %}
   </div>

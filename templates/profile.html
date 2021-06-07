@@ -1,11 +1,8 @@
 {% extends 'student/sbase.html' %}
 {% load static %}
 {% block content %}
-<section class="d-flex align-items-center">
-</section>
 <div class="container my-4">
-
-        <div class="row my-4 mx-4">
+        <div class="row my-4 mx-5 justify-content-center">
             <div class="col-6">
                 <label>Name :</label>
                 <p class="font-weight-bold h4">{{ user.first_name }} {{ user.last_name }}</p>
@@ -18,7 +15,7 @@
                 
             </div>
         </div>
-        <div class="row my-4 mx-4">
+        <div class="row my-4 mx-5 justify-content-center">
             <div class="col-6">
                 <label>Depatment :</label>
                 <p class="font-weight-bold h4">{{ in.dpt }}</p>
@@ -29,7 +26,7 @@
             </div>
             
         </div>
-        <div class="row my-4 mx-4">
+        <div class="row my-4 mx-5 justify-content-center">
             <div class="col-6">
                 <label>Mob.Number :</label>
                 <p class="font-weight-bold h4">{{ in.m_num }}</p>

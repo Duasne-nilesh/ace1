@@ -43,12 +43,12 @@
                         <input class="form-control" id="input" type="text" name="option4" placeholder="Options..." />
                     </div>
                 </div>
-                <div class="row m-3">
+                <div class="row my-3 justify-content-center">
                     <div class="col-4">
                         <label for="cor_op" class="font-weight-bold"> Correct Option</label>
                         <input class="form-control" id="input" type="text" id="cor_op" name="answer" placeholder="Correct option" />
                     </div>
-                    <div class="col-8 mb-5">
+                    <!-- <div class="col-8 mb-5">
                         <label for="cat" class="font-weight-bold">Category :</label>
                         <select type="text" name="category" class="form-control" placeholder="category" id="cat" >
                             <option value="" hidden>Select question category</option>
@@ -57,13 +57,15 @@
                             <option value="Ananlysis">Ananlysis</option>
                             <option value="Application">Application</option>
                         </select>
-                    </div>
+                    </div> -->
                 </div>            
             </div>
-            <div class="row">
-                <div class="col-10 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-default btn-primary">Add Question</button>
-                    <a class="btn btn-primary mx-3" href="/faculty">Create Test</a>
+            <div class="row my-5">
+                <div class="col-5 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-outline-primary btn-block">Add Question</button>
+                </div>
+                <div class="col-5 d-flex justify-content-center">
+                    <a class="btn btn-primary btn-block" href="/faculty">Create Test</a>
                 </div>
             </div>
         </form>

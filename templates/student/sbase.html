@@ -14,18 +14,21 @@
 <body>
     <header id="header" class="fixed-top" style="background-color: #37517ed3;">
         <div class="container d-flex align-items-center">
-          <h1 class="logo mr-auto"><a href="/student/exams">Aces.</a></h1>
+          <h1 class="logo mr-auto"><a href="/exams">Aces.</a></h1>
           <nav class="nav-menu d-none d-lg-block">
             <ul>
-              <li><a href="/student/exams">Live Exams</a></li>
-              <li><a href="/student/view_report">Reports</a></li>
-              <li><a href="/student/profile">Profile</a></li>
+              <li><a href="/exams">Live Exams</a></li>
+              <li><a href="/view_report">Reports</a></li>
+              <li><a href="/profile">Profile</a></li>
             </ul>
           </nav>
-          <a class="get-started-btn scrollto" type="submit" href="logout">Log Out</a>
+          <a class="get-started-btn scrollto" type="submit" href="{% url 'logout' %}">Log Out</a>
     
         </div>
       </header>
+      <div class="row mt-5 pt-5 justify-content-center">
+        <h1>Hello {{ user.first_name }}</h1>
+      </div>
             {% block content %}
             {% endblock %}
             <footer id="footer">

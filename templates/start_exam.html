@@ -18,10 +18,12 @@
   <div class="container">
   <!-- <form method='POST' action="/start_exam/{{ subject }}" >
       {% csrf_token %} -->
-      <h2 align="center">Test</h2>
+      <h2 align="center">{{subject}} Test</h2>
       {% for al in que %}
-      <div class="my-5">
-        <h5 name="q{{ forloop.counter }}" value="{{ forloop.counter }}">Q{{forloop.counter}}. {{ al.question }} - ({{ al.category }})</h5>
+      <div class="my-4">
+        <div class="row">
+          <div class="card border-primary p-3" style="width:100%; background-color: #d2e8fc;">
+            <h5 name="q{{ forloop.counter }}" value="{{ forloop.counter }}">Q{{forloop.counter}}. {{ al.question }} <span class="font-weight-bolder text-danger">({{ al.category }})</span></h5>
         <div class="form-check">
             <input class="form-check-input" type="radio" value="{{al.option1}}" name={{ forloop.counter }} id="q_{{ forloop.counter }}_o1">
             <label class="form-check-label" for="q_{{ forloop.counter }}_o1">
@@ -41,22 +43,28 @@
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" value="{{al.option4}}" name={{ forloop.counter }} id="q_{{ forloop.counter }}_o4" >
+            <input class="form-check-input" type="radio" value="{{al.option4}}" name="{{ forloop.counter }}" id="q_{{ forloop.counter }}_o4" >
             <label class="form-check-label" for="q_{{ forloop.counter }}_o4">
               {{al.option4}}
             </label>
         </div>
         <div class="d-none">
-          <input type="text" id="year_{{ forloop.counter }}" name="year_{{ forloop.counter }}" value={{al.year}}>
-          <input type="text" id="sem_{{ forloop.counter }}" name="sem_{{ forloop.counter }}" value={{al.semester}}>
+          <input type="text" id="year_{{ forloop.counter }}" name="year_{{ forloop.counter }}" value="{{al.year}}">
+          <input type="text" id="sem_{{ forloop.counter }}" name="sem_{{ forloop.counter }}" value="{{al.semester}}">
           <input type="text" id="sub_{{ forloop.counter }}" name="sub_{{ forloop.counter }}" value="{{ al.subject }}">
-          <input type="text" id="id_{{ forloop.counter }}" name="id_{{ forloop.counter }}" value={{al.id}}>
-          <input type="text" id="c_{{ forloop.counter }}" name="c_{{ forloop.counter }}" value={{al.answer}}>
-          <input type="text" id="cat_{{ forloop.counter }}" name="cat_{{ forloop.counter }}" value={{al.category}}>
+          <input type="text" id="id_{{ forloop.counter }}" name="id_{{ forloop.counter }}" value="{{al.id}}">
+          <input type="text" id="c_{{ forloop.counter }}" name="c_{{ forloop.counter }}" value="{{al.answer}}">
+          <input type="text" id="cat_{{ forloop.counter }}" name="cat_{{ forloop.counter }}" value="{{al.category}}">
+        </div>
+          </div>
         </div>
     </div>
       {% endfor %}
-      <button class="btn btn-primary" id="submit">Submit</button>
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <button class="btn btn-primary btn-block" style="height:3rem" id="submit"><span class="font-weight-bold" style="font-size: x-large;">Submit</span></button>
+        </div>
+      </div>
     <!-- </form> -->
   </div>
 
@@ -95,11 +103,13 @@
         data:{
           'submission':JSON.stringify(submission)
         },
-        success:function(data){
-          console.log(data);
+        success:function(){
+          console.log("success");
+          window.location.href = "/exams"
         },
         error:function(err){
-          console.log(err);
+          console.log("err");
+          window.location.href = "/report_details/{{ subject }}"
         }
       })
     })

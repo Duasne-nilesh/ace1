@@ -11,15 +11,20 @@ import json
 
 
 def exams(request):
-    a = questions.objects.order_by().values('subject','year','semester').distinct()
-    inf = extendUser.objects.filter(user=request.user.id)
-    return render(request,'student/exam.html',{'a':a,'inf':inf})
+    done = quiz_response.objects.order_by().filter(student_id=request.user.id).values('subject','year','semester').distinct().values('subject')
+    for d in done:
+        print(d)
+    inf = extendUser.objects.filter(user=request.user.id).first()
+    print(inf.year)
+    a = questions.objects.order_by().filter(year=inf.year).values('subject','year','semester').distinct().exclude(subject__in=done)
+    return render(request,'exam.html',{'a':a,'inf':inf})
 
 def start_exam(request,subject):
     if request.user.is_authenticated:
         if request.method == "POST":
             array_data = request.POST['submission']
             data = json.loads(array_data)
+            print(data)
             for obj in data:
                 vals = list(obj.values())
                 print(vals)
@@ -38,14 +43,11 @@ def start_exam(request,subject):
                 print(marks)
                 res = quiz_response(student_id=request.user.id,year=year, semester=sem,subject=subject,q_id=q_id,sub_answer=sub_answer,corr_answer=corr_answer,category=category,marks=marks)
                 res.save()
-                return redirect('student/report_details/'+subject)
+            # return redirect('/report_details/'+subject)
         que = questions.objects.filter(subject=subject)
-        return render(request,'student/start_exam.html',{'que':que,'subject':subject})
-
-def submit_response(request):
-    pass
-    # print(json.loads(request.POST.get('data', ''))
-    # return render(request,'student/start_exam.html')
+        for q in que:
+            print(q.year)
+        return render(request,'start_exam.html',{'que':que,'subject':subject})
 
 
 
@@ -84,7 +86,7 @@ def faculty(request):
 @staff_member_required
 def view_question(request,subject):
     query = questions.objects.filter(subject=subject)
-    return render(request,'view_question.html',{'query':query})
+    return render(request,'view_question.html',{'query':query,'subject':subject})
 
 @staff_member_required
 def delete_test(request,subject):
@@ -92,11 +94,11 @@ def delete_test(request,subject):
     return redirect('/faculty')
 
 def view_report(request):
-    a = questions.objects.order_by().values('subject','year','semester').distinct()
+    a = quiz_response.objects.filter(student_id=request.user.id).order_by().values('subject','year','semester').distinct()
     return render(request,'view_report.html',{'a':a})
 
 def report_details(request,subject):
-    print(subject)
+    # print(subject)
     full_data = quiz_response.objects.filter(student_id=request.user.id,subject=subject)
     total=0
     total_marks = 0
@@ -110,29 +112,31 @@ def report_details(request,subject):
     app_c=0
     for data in full_data:
         total+=1
+        # print(data.marks)
         if data.category=="Knowledge":
             k+=1
-            if data.marks == 1:
+            if int(data.marks) == 1:
                 k_c+=1
                 total_marks+=1
             
         if data.category=="Understanding":
             u+=1
-            if data.marks == 1:
+            if int(data.marks) == 1:
                 u_c+=1
                 total_marks+=1
             
         if data.category=="Application":
             app+=1
-            if data.marks == 1:
+            if int(data.marks) == 1:
                 app_c+=1
                 total_marks+=1
             
         if data.category=="Analysis":
             a+=1
-            if data.marks == 1:
+            if int(data.marks) == 1:
                 a_c+=1
                 total_marks+=1
             
-
-    return render(request,'view_report_details.html',{'total':total,'marks':total_marks,'k':k,'k_c':k_c})
+    print(total)
+    print(total_marks)
+    return render(request,'view_report_details.html',{'subject':subject,'total':total,'total_marks':total_marks,'k':k,'k_c':k_c,'a':a,'a_c':a_c,'app':app,'app_c':app_c,'u':u,'u_c':u_c})
